@@ -14,3 +14,7 @@ node_modules/*
 # Intellij           #
 ######################
 .idea
+
+# Project specific   #
+######################
+# **/reports/*
