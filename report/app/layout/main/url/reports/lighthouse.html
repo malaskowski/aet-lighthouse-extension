@@ -269,7 +269,8 @@
             <span class="lh-scorescale-range lh-scorescale-range--pass">90–100</span>
           </div>
           <div style="margin: 12px auto 0 auto;">
-            <div class="button button-small button-blue open-viewer" ng-attr-data-report="{{case.getDataUrl()}}">Open in the Lighthouse Viewer</div>
+            <span class="button button-small button-dark open-viewer" ng-attr-data-report="{{case.getDataUrl()}}">Open in the Lighthouse Viewer</span><br/>
+            <a class="button button-small button-dark" href="{{case.getDataUrl()}}" download="report.{{case.comparator.stepResult.data.collectTimestamp}}.json">Download Lighthouse report</a>
           </div>
         </div>
       </div>
