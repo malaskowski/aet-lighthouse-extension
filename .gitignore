@@ -17,4 +17,4 @@ node_modules/*
 
 # Project specific   #
 ######################
-# **/reports/*
+**/reports/*
