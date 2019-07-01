@@ -1,0 +1,16 @@
+# Generated files #
+###################
+.project
+.classpath
+.settings
+generated
+
+# Gradle files
+build
+.gradle
+
+node_modules/*
+
+# Intellij           #
+######################
+.idea

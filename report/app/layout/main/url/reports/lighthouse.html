@@ -1,0 +1,425 @@
+<!--
+
+    AET
+
+    Copyright (C) 2019 Cognifide Limited
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div class="tab-content-toolbar">
+  <div class="toolbar-blocks">
+    <div class="toolbar-btns pull-left">
+      <span class="status warning">Beta version</span>
+    </div>
+    <div class="toolbar-btns pull-right">
+      <ng-include src="'app/layout/main/url/navigation/navigation.comments.html'"/>
+    </div>
+  </div>
+</div>
+<div class="lh-root lh-vars">
+  <style>
+
+    .score100 .lh-header-bg {
+      background-color: hsl(234, 64%, 19%);
+    }
+
+    .score100 .lh-metadata, .score100 .lh-toolbar__metadata, .score100 .lh-product-info {
+      color: #fff;
+    }
+
+    .score100 .lh-config {
+      color: #eee;
+    }
+
+    /* CSS Fireworks. Originally by Eddie Lin
+       https://codepen.io/paulirish/pen/yEVMbP
+    */
+    .pyro {
+      display: none;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .score100 .pyro {
+      display: block;
+    }
+
+    .score100 .lh-lighthouse stop:first-child {
+      stop-color: hsla(200, 12%, 95%, 0);
+    }
+
+    .score100 .lh-lighthouse stop:last-child {
+      stop-color: hsla(65, 81%, 76%, 1);
+    }
+
+    .pyro > .before, .pyro > .after {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 2.5px;
+      box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
+      animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+      animation-delay: 1s, 1s, 1s;
+    }
+
+    .pyro > .after {
+      animation-delay: 2.25s, 2.25s, 2.25s;
+      animation-duration: 1.25s, 1.25s, 6.25s;
+    }
+
+    .fireworks-paused .pyro > div {
+      animation-play-state: paused;
+    }
+
+    @keyframes bang {
+      to {
+        box-shadow: -70px -115.67px #47ebbc, -28px -99.67px #eb47a4, 58px -31.67px #7eeb47, 13px -141.67px #eb47c5, -19px 6.33px #7347eb, -2px -74.67px #ebd247, 24px -151.67px #eb47e0, 57px -138.67px #b4eb47, -51px -104.67px #479eeb, 62px 8.33px #ebcf47, -93px 0.33px #d547eb, -16px -118.67px #47bfeb, 53px -84.67px #47eb83, 66px -57.67px #eb47bf, -93px -65.67px #91eb47, 30px -13.67px #86eb47, -2px -59.67px #83eb47, -44px 1.33px #eb47eb, 61px -58.67px #47eb73, 5px -22.67px #47e8eb, -66px -28.67px #ebe247, 42px -123.67px #eb5547, -75px 26.33px #7beb47, 15px -52.67px #a147eb, 36px -51.67px #eb8347, -38px -12.67px #eb5547, -46px -59.67px #47eb81, 78px -114.67px #eb47ba, 15px -156.67px #eb47bf, -36px 1.33px #eb4783, -72px -86.67px #eba147, 31px -46.67px #ebe247, -68px 29.33px #47e2eb, -55px 19.33px #ebe047, -56px 27.33px #4776eb, -13px -91.67px #eb5547, -47px -138.67px #47ebc7, -18px -96.67px #eb47ac, 11px -88.67px #4783eb, -67px -28.67px #47baeb, 53px 10.33px #ba47eb, 11px 19.33px #5247eb, -5px -11.67px #eb4791, -68px -4.67px #47eba7, 95px -37.67px #eb478b, -67px -162.67px #eb5d47, -54px -120.67px #eb6847, 49px -12.67px #ebe047, 88px 8.33px #47ebda, 97px 33.33px #eb8147, 6px -71.67px #ebbc47;
+      }
+    }
+
+    @keyframes gravity {
+      to {
+        transform: translateY(80px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes position {
+      0%, 19.9% {
+        margin-top: 4%;
+        margin-left: 47%;
+      }
+      20%, 39.9% {
+        margin-top: 7%;
+        margin-left: 30%;
+      }
+      40%, 59.9% {
+        margin-top: 6%;
+        margin-left: 70%;
+      }
+      60%, 79.9% {
+        margin-top: 3%;
+        margin-left: 20%;
+      }
+      80%, 99.9% {
+        margin-top: 3%;
+        margin-left: 80%;
+      }
+    }
+  </style>
+  <style>
+    .lh-scores-container {
+      display: flex;
+      flex-direction: column;
+      padding: var(--header-padding);
+      position: relative;
+      width: 100%;
+    }
+
+    .lh-sticky-header {
+      --gauge-circle-size: 36px;
+      --plugin-badge-size: 18px;
+      --plugin-icon-size: 75%;
+      --score-container-width: 60px;
+      --score-number-font-size: 13px;
+      position: sticky;
+      left: 0;
+      right: 0;
+      top: var(--topbar-height);
+      font-weight: 700;
+      display: none;
+      justify-content: center;
+      background-color: var(--color-sticky-header-bg);
+      border-bottom: 1px solid var(--color-black-200);
+      padding-top: var(--score-container-padding);
+      padding-bottom: 4px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .lh-sticky-header--visible {
+      display: flex;
+      pointer-events: auto;
+    }
+
+    /* Disable the gauge arc animation for the sticky header, so toggling display: none
+       does not play the animation. */
+    .lh-sticky-header .lh-gauge-arc {
+      animation: none;
+    }
+
+    .lh-sticky-header .lh-gauge__label {
+      display: none;
+    }
+
+    .lh-highlighter {
+      width: var(--score-container-width);
+      height: 1px;
+      background: var(--color-highlighter-bg);
+      position: absolute;
+      bottom: -5px;
+    }
+
+    .lh-gauge__wrapper:first-of-type {
+      contain: none;
+    }
+  </style>
+  <div>
+    <div class="lh-scorescale">
+      <span class="lh-scorescale-range lh-scorescale-range--fail">0–49</span>
+      <span class="lh-scorescale-range lh-scorescale-range--average">50–89</span>
+      <span class="lh-scorescale-range lh-scorescale-range--pass">90–100</span>
+    </div>
+  </div>
+  <div class="layout-compare-item pull-left">
+    <div class="lh-header-container">
+      <div class="lh-scores-wrapper">
+        <div class="lh-scores-container">
+          <p class="layout-compare-description">Pattern
+            <span class="label label-info">{{case.comparator.stepResult.data.patternTimestamp | date:'yyyy-MM-dd HH:mm'}}</span><br/>
+            <span>Collected with Lighthouse {{case.collectorResult.lighthouseVersion}}</span>
+            <span class="label-spacer"></span>
+          </p>
+          <div class="lh-scores-header">
+            <div class="lh-gauge__wrapper" ng-class="case.result.pattern.performance < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.pattern.performance < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.pattern.performance * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.pattern.performance * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Performance</div>
+              <div class="lh-gauge__label">&nbsp;</div>
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.pattern.accessibility < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.pattern.accessibility < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.pattern.accessibility * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.pattern.accessibility * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Accessibility</div>
+              <div class="lh-gauge__label">&nbsp;</div>
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.pattern.bestPractices < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.pattern.bestPractices < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.pattern.bestPractices * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.pattern.bestPractices * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Best Practices</div>
+              <div class="lh-gauge__label">&nbsp;</div>
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.pattern.seo < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.pattern.seo < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.pattern.seo * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.pattern.seo * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">SEO</div>
+              <div class="lh-gauge__label">&nbsp;</div>
+            </div>
+
+          </div>
+
+          <div class="button button-small button-blue open-viewer" ng-attr-data-report="{{case.getPatternUrl()}}">Open pattern in Lighthouse Viewer</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="layout-compare-item pull-left">
+    <div class="lh-header-container">
+      <div class="lh-scores-wrapper">
+        <div class="lh-scores-container">
+          <p class="layout-compare-description">Current
+            <span class="label label-info">{{case.comparator.stepResult.data.collectTimestamp | date:'yyyy-MM-dd HH:mm'}}</span><br/>
+            <span>Collected with Lighthouse {{case.collectorResult.lighthouseVersion}}</span>
+            <span class="label-spacer"></span>
+          </p>
+          <div class="lh-scores-header">
+            <div class="lh-gauge__wrapper" ng-class="case.result.current.performance < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.current.performance < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.current.performance * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.current.performance * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Performance</div>
+              <div class="lh-gauge__label status" ng-class="case.result.diff.performanceDiff.status == 'PASS' ? 'passed' : 'failed'">
+                Diff: {{(case.result.diff.performanceDiff.diff | number: 2) * 100}}
+              </div>
+
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.current.accessibility < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.current.accessibility < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.current.accessibility * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.current.accessibility * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Accessibility</div>
+              <div class="lh-gauge__label status" ng-class="case.result.diff.accessibilityDiff.status == 'PASS' ? 'passed' : 'failed'">
+                Diff: {{(case.result.diff.accessibilityDiff.diff | number: 2) * 100}}
+              </div>
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.current.bestPractices < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.current.bestPractices < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.current.bestPractices * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.current.bestPractices * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">Best Practices</div>
+              <div class="lh-gauge__label status" ng-class="case.result.diff.bestPracticesDiff.status == 'PASS' ? 'passed' : 'failed'">
+                Diff: {{(case.result.diff.bestPracticesDiff.diff | number: 2) * 100}}
+              </div>
+            </div>
+
+            <div class="lh-gauge__wrapper" ng-class="case.result.current.seo < 0.5 ? 'lh-gauge__wrapper--fail' : case.result.current.seo < 0.9 ? 'lh-gauge__wrapper--average' : 'lh-gauge__wrapper--pass' ">
+              <!-- Wrapper exists for the ::before plugin icon. Cannot create pseudo-elements on svgs. -->
+              <div class="lh-gauge__svg-wrapper">
+                <svg viewBox="0 0 120 120" class="lh-gauge">
+                  <circle class="lh-gauge-base" r="56" cx="60" cy="60"></circle>
+                  <circle class="lh-gauge-arc" transform="rotate(-90 60 60)" r="56" cx="60" cy="60"
+                          ng-style="{
+                              'stroke-dasharray': (case.result.current.seo * 352) + ', 352'
+                                    }"></circle>
+                </svg>
+              </div>
+              <div class="lh-gauge__percentage">{{case.result.current.seo * 100 | number: 0}}</div>
+              <!-- TODO: should likely be an h2  -->
+              <div class="lh-gauge__label">SEO</div>
+              <div class="lh-gauge__label status" ng-class="case.result.diff.seoDiff.status == 'PASS' ? 'passed' : 'failed'">
+                Diff: {{(case.result.diff.seoDiff.diff | number: 2) * 100}}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="button button-small button-blue open-viewer" ng-attr-data-report="{{case.getDataUrl()}}">Open current in Lighthouse Viewer</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+
+    function loadJSON(callback, file) {
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+      xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+      };
+      xobj.send(null);
+    }
+
+    function __initReportData__(file) {
+      loadJSON(function (response) {
+        openTabAndSendJsonReport(JSON.parse(response));
+      }, file);
+    }
+
+    /**
+     * Opens a new tab to the online viewer and sends the local page's JSON results
+     * to the online viewer using postMessage.
+     */
+    function openTabAndSendJsonReport(reportJson) {
+      const VIEWER_ORIGIN = 'https://googlechrome.github.io';
+      const VIEWER_PATH = '/lighthouse/viewer/';
+      // Chrome doesn't allow us to immediately postMessage to a popup right
+      // after it's created. Normally, we could also listen for the popup window's
+      // load event, however it is cross-domain and won't fire. Instead, listen
+      // for a message from the target app saying "I'm open".
+      const json = reportJson;
+      window.addEventListener('message', function msgHandler(messageEvent) {
+        if (messageEvent.origin !== VIEWER_ORIGIN) {
+          return;
+        }
+        if (popup && messageEvent.data.opened) {
+          popup.postMessage({lhresults: json}, VIEWER_ORIGIN);
+          window.removeEventListener('message', msgHandler);
+        }
+      });
+
+      // The popup's window.name is keyed by version+url+fetchTime, so we reuse/select tabs correctly
+      // @ts-ignore - If this is a v2 LHR, use old `generatedTime`.
+      const fallbackFetchTime = /** @type {string} */ (json.generatedTime);
+      const fetchTime = json.fetchTime || fallbackFetchTime;
+      const windowName = `${json.lighthouseVersion}-${json.requestedUrl}-${fetchTime}`;
+      const popup = window.open(`${VIEWER_ORIGIN}${VIEWER_PATH}`, windowName);
+    }
+
+    var viewerButtons = document.getElementsByClassName("open-viewer");
+    for (var i = 0; i < viewerButtons.length; i++) {
+      viewerButtons[i].addEventListener('click', function () {
+        __initReportData__(this.dataset.report)
+      }, false);
+    }
+  </script>
+</div>
+<link rel="stylesheet" href="https://googlechrome.github.io/lighthouse/viewer/styles/viewer.css">
