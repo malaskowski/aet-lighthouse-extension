@@ -53,10 +53,11 @@ public class LighthouseCollector implements CollectorJob {
   public final CollectorStepResult collect() throws ProcessingException {
     final CollectorStepResult stepResult;
     try {
-      String report = getLighthouseReportFor(collectorProperties.getUrl());
-      LOGGER.debug("Got report from lighthouse: {}", report);
+      String result = getLighthouseReportFor(collectorProperties.getUrl());
+      LOGGER.debug("Got report from lighthouse: {}", result);
+      JsonObject resultAsJson = new JsonParser().parse(result).getAsJsonObject();
       String resultId = artifactsDAO.saveArtifactInJsonFormat(
-          collectorProperties, new JsonParser().parse(report).getAsJsonObject()
+          collectorProperties, resultAsJson.getAsJsonObject("report")
       );
       stepResult = CollectorStepResult.newCollectedResult(resultId);
     } catch (Exception e) {
@@ -73,7 +74,6 @@ public class LighthouseCollector implements CollectorJob {
     Request lighthouseRequest = Request.Post(lighthouseInstanceUri)
         .connectTimeout(30000)
         .socketTimeout(30000)
-        .addHeader("X-API-KEY", "AET")
         .addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
         .bodyString(requestBody.toString(), ContentType.APPLICATION_JSON);
 

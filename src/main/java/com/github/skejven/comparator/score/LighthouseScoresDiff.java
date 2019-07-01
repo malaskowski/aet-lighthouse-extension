@@ -27,9 +27,9 @@ public class LighthouseScoresDiff {
     private double diff;
     private Status status;
 
-    ScoreDiff(double diff) {
+    ScoreDiff(double diff, double threshold) {
       this.diff = diff;
-      this.status = Status.fromDiff(diff, 0.02);
+      this.status = Status.fromDiff(diff, threshold);
     }
 
     public double getDiff() {
@@ -60,31 +60,34 @@ public class LighthouseScoresDiff {
     private ScoreDiff accessibilityDiff;
     private ScoreDiff bestPracticesDiff;
     private ScoreDiff seoDiff;
+    
+    private final double threshold;
 
-    private Builder() {
+    private Builder(double threshold) {
+      this.threshold = threshold;
     }
 
-    public static Builder aLighthouseScoresDiff() {
-      return new Builder();
+    public static Builder aLighthouseScoresDiff(double thershold) {
+      return new Builder(thershold);
     }
 
     public Builder withPerformanceDiff(double performanceDiff) {
-      this.performanceDiff = new ScoreDiff(performanceDiff);
+      this.performanceDiff = new ScoreDiff(performanceDiff, threshold);
       return this;
     }
 
     public Builder withAccessibilityDiff(double accessibilityDiff) {
-      this.accessibilityDiff = new ScoreDiff(accessibilityDiff);
+      this.accessibilityDiff = new ScoreDiff(accessibilityDiff, threshold);
       return this;
     }
 
     public Builder withBestPracticesDiff(double bestPracticesDiff) {
-      this.bestPracticesDiff = new ScoreDiff(bestPracticesDiff);
+      this.bestPracticesDiff = new ScoreDiff(bestPracticesDiff, threshold);
       return this;
     }
 
     public Builder withSeoDiff(double seoDiff) {
-      this.seoDiff = new ScoreDiff(seoDiff);
+      this.seoDiff = new ScoreDiff(seoDiff, threshold);
       return this;
     }
 

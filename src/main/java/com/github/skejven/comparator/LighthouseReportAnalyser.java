@@ -15,21 +15,22 @@
  */
 package com.github.skejven.comparator;
 
+import com.github.skejven.comparator.score.KPI;
 import com.github.skejven.comparator.score.LighthouseScores;
 import com.github.skejven.comparator.score.LighthouseScoresDiff;
 import com.github.skejven.comparator.score.LighthouseScoresDiff.Builder;
 
 class LighthouseReportAnalyser {
 
-  LighthouseComparisonResult compare(LighthouseScores pattern, LighthouseScores current) {
-    LighthouseScoresDiff diff = Builder.aLighthouseScoresDiff()
-        .withPerformanceDiff(diff(pattern.getPerformance(), current.getPerformance()))
-        .withAccessibilityDiff(diff(pattern.getAccessibility(), current.getAccessibility()))
-        .withBestPracticesDiff(diff(pattern.getBestPractices(), current.getBestPractices()))
-        .withSeoDiff(diff(pattern.getSeo(), current.getSeo()))
+  LighthouseComparisonResult compare(LighthouseScores current, KPI kpi) {
+    LighthouseScoresDiff diff = Builder.aLighthouseScoresDiff(kpi.getThreshold())
+        .withPerformanceDiff(diff(current.getPerformance(), kpi.getPerformance()))
+        .withAccessibilityDiff(diff(current.getAccessibility(), kpi.getAccessibility()))
+        .withBestPracticesDiff(diff(current.getBestPractices(), kpi.getBestPractices()))
+        .withSeoDiff(diff(current.getSeo(), kpi.getSeo()))
         .build();
 
-    return new LighthouseComparisonResult(pattern, current, diff);
+    return new LighthouseComparisonResult(kpi, current, diff);
   }
 
   private double diff(double pattern, double current) {

@@ -9,7 +9,7 @@ generated
 build
 .gradle
 
-node_modules/*
+**/node_modules/*
 
 # Intellij           #
 ######################

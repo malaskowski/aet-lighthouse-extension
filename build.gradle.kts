@@ -32,6 +32,7 @@ dependencies {
     implementation(group = "com.google.code.gson", name = "gson", version = "2.8.5")
     implementation(group = "org.apache.httpcomponents", name = "fluent-hc", version = "4.5.5")
     implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.7")
+    implementation(group = "org.apache.commons", name = "commons-lang3", version = "3.7")
 
     api("com.cognifide.aet:communication-api:3.2.2")
     api("com.cognifide.aet:jobs-api:3.2.2")

@@ -15,26 +15,27 @@
  */
 package com.github.skejven.comparator;
 
+import com.github.skejven.comparator.score.KPI;
 import com.github.skejven.comparator.score.LighthouseScores;
 import com.github.skejven.comparator.score.LighthouseScoresDiff;
 
 class LighthouseComparisonResult {
 
-  private LighthouseScores pattern;
+  private KPI kpi;
   private LighthouseScores current;
   private LighthouseScoresDiff diff;
 
   LighthouseComparisonResult(
-      LighthouseScores pattern,
+      KPI kpi,
       LighthouseScores current,
       LighthouseScoresDiff diff) {
-    this.pattern = pattern;
+    this.kpi = kpi;
     this.current = current;
     this.diff = diff;
   }
 
-  public LighthouseScores getPattern() {
-    return pattern;
+  public KPI getKpi() {
+    return kpi;
   }
 
   public LighthouseScores getCurrent() {

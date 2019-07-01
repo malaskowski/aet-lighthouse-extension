@@ -18,26 +18,29 @@ package com.github.skejven.comparator;
 import com.cognifide.aet.communication.api.metadata.ComparatorStepResult;
 import com.cognifide.aet.job.api.comparator.ComparatorJob;
 import com.cognifide.aet.job.api.comparator.ComparatorProperties;
-import com.cognifide.aet.job.api.exceptions.ParametersException;
 import com.cognifide.aet.job.api.exceptions.ProcessingException;
 import com.cognifide.aet.vs.ArtifactsDAO;
+import com.github.skejven.comparator.score.KPI;
 import com.github.skejven.comparator.score.LighthouseScores;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LighthouseComparator implements ComparatorJob {
 
-  public static final String TYPE = "lighthouse";
+  private static final Logger LOGGER = LoggerFactory.getLogger(LighthouseComparator.class);
 
-  public static final String NAME = "lighthouse";
+  static final String TYPE = "lighthouse";
+  static final String NAME = "lighthouse";
 
   private final ArtifactsDAO artifactsDAO;
   private final ComparatorProperties properties;
   private final LighthouseReportAnalyser analyser;
   private final JsonParser jsonParser;
-
+  private KPI kpi;
 
   LighthouseComparator(ArtifactsDAO artifactsDAO, ComparatorProperties comparatorProperties,
       LighthouseReportAnalyser analyser, JsonParser jsonParser) {
@@ -51,10 +54,9 @@ public class LighthouseComparator implements ComparatorJob {
   public ComparatorStepResult compare() throws ProcessingException {
     final ComparatorStepResult result;
     try {
-      LighthouseScores patternScores = getSimplifiedReport(jsonParser, properties.getPatternId());
       LighthouseScores currentScores = getSimplifiedReport(jsonParser, properties.getCollectedId());
 
-      LighthouseComparisonResult comparisonResult = analyser.compare(patternScores, currentScores);
+      LighthouseComparisonResult comparisonResult = analyser.compare(currentScores, kpi);
 
       String artifactId = artifactsDAO.saveArtifactInJsonFormat(properties, comparisonResult);
       result = getPassedStepResult(artifactId);
@@ -65,8 +67,15 @@ public class LighthouseComparator implements ComparatorJob {
   }
 
   @Override
-  public void setParameters(Map<String, String> params) throws ParametersException {
-    //no parameters needed
+  public void setParameters(Map<String, String> params) {
+    kpi = KPI.Builder.aKPI()
+        .withPerformance(params.get("kpi-performance"))
+        .withAccessibility(params.get("kpi-accessibility"))
+        .withBestPractices(params.get("kpi-best-practices"))
+        .withSeo(params.get("kpi-seo"))
+        .withThreshold(params.get("kpi-threshold"))
+        .build();
+    LOGGER.debug("KPI for LighthouseComparator: {}", kpi);
   }
 
   private LighthouseScores getSimplifiedReport(JsonParser jsonParser, String collectedId)
