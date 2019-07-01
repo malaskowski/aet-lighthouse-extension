@@ -23,7 +23,7 @@ import com.github.skejven.comparator.score.LighthouseScoresDiff.Builder;
 class LighthouseReportAnalyser {
 
   LighthouseComparisonResult compare(LighthouseScores current, KPI kpi) {
-    LighthouseScoresDiff diff = Builder.aLighthouseScoresDiff(kpi.getThreshold())
+    LighthouseScoresDiff diff = Builder.aLighthouseScoresDiff(toPercentage(kpi.getThreshold()))
         .withPerformanceDiff(diff(current.getPerformance(), kpi.getPerformance()))
         .withAccessibilityDiff(diff(current.getAccessibility(), kpi.getAccessibility()))
         .withBestPracticesDiff(diff(current.getBestPractices(), kpi.getBestPractices()))
@@ -33,8 +33,12 @@ class LighthouseReportAnalyser {
     return new LighthouseComparisonResult(kpi, current, diff);
   }
 
-  private double diff(double pattern, double current) {
-    return current - pattern;
+  private double diff(double current, int kpi) {
+    return current - toPercentage(kpi);
+  }
+
+  private double toPercentage(int i) {
+    return i / 100.d;
   }
 
 }

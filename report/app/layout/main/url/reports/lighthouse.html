@@ -176,17 +176,12 @@
     }
   </style>
   <div>
-    <div class="lh-scorescale">
-      <span class="lh-scorescale-range lh-scorescale-range--fail">0–49</span>
-      <span class="lh-scorescale-range lh-scorescale-range--average">50–89</span>
-      <span class="lh-scorescale-range lh-scorescale-range--pass">90–100</span>
-    </div>
     <div class="lh-header-container">
       <div class="lh-scores-wrapper">
         <div class="lh-scores-container">
-          <p class="layout-compare-description">Current
-            <span class="label label-info">{{case.comparator.stepResult.data.collectTimestamp | date:'yyyy-MM-dd HH:mm'}}</span><br/>
-            <span>Collected with Lighthouse {{case.collectorResult.lighthouseVersion}}</span>
+          <p class="layout-compare-description">
+            <span class="label label-info">Collected with Lighthouse {{case.collectorResult.lighthouseVersion}}
+              at {{case.comparator.stepResult.data.collectTimestamp | date:'yyyy-MM-dd HH:mm'}}</span><br/>
             <span class="label-spacer"></span>
           </p>
           <div class="lh-scores-header">
@@ -268,8 +263,13 @@
             </div>
 
           </div>
-
-          <div class="button button-small button-blue open-viewer" ng-attr-data-report="{{case.getDataUrl()}}">Open current in Lighthouse Viewer</div>
+          <div class="lh-scorescale">
+            <span class="lh-scorescale-range lh-scorescale-range--fail">0–49</span>
+            <span class="lh-scorescale-range lh-scorescale-range--average">50–89</span>
+            <span class="lh-scorescale-range lh-scorescale-range--pass">90–100</span>
+          </div><br/>
+          <span class="label-spacer"></span>
+          <div class="button button-small button-blue open-viewer" ng-attr-data-report="{{case.getDataUrl()}}">Open in the Lighthouse Viewer</div>
         </div>
       </div>
 

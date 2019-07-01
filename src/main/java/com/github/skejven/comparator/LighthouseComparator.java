@@ -16,12 +16,14 @@
 package com.github.skejven.comparator;
 
 import com.cognifide.aet.communication.api.metadata.ComparatorStepResult;
+import com.cognifide.aet.communication.api.metadata.ComparatorStepResult.Status;
 import com.cognifide.aet.job.api.comparator.ComparatorJob;
 import com.cognifide.aet.job.api.comparator.ComparatorProperties;
 import com.cognifide.aet.job.api.exceptions.ProcessingException;
 import com.cognifide.aet.vs.ArtifactsDAO;
 import com.github.skejven.comparator.score.KPI;
 import com.github.skejven.comparator.score.LighthouseScores;
+import com.github.skejven.comparator.score.LighthouseScoresDiff;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
@@ -59,7 +61,7 @@ public class LighthouseComparator implements ComparatorJob {
       LighthouseComparisonResult comparisonResult = analyser.compare(currentScores, kpi);
 
       String artifactId = artifactsDAO.saveArtifactInJsonFormat(properties, comparisonResult);
-      result = getPassedStepResult(artifactId);
+      result = getStepResult(comparisonResult.getDiff(), artifactId);
     } catch (Exception e) {
       throw new ProcessingException(e.getMessage(), e);
     }
@@ -92,9 +94,9 @@ public class LighthouseComparator implements ComparatorJob {
     result.addData("collectTimestamp", Long.toString(System.currentTimeMillis()));
   }
 
-  private ComparatorStepResult getPassedStepResult(String artifactId) {
-    ComparatorStepResult result = new ComparatorStepResult(artifactId,
-        ComparatorStepResult.Status.PASSED, false);
+  private ComparatorStepResult getStepResult(LighthouseScoresDiff diff, String artifactId) {
+    Status status = diff.allPassed() ? Status.PASSED : Status.FAILED;
+    ComparatorStepResult result = new ComparatorStepResult(artifactId, status, false);
     addTimestampToResult(result);
     return result;
   }

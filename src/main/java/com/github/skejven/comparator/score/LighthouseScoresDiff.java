@@ -15,12 +15,19 @@
  */
 package com.github.skejven.comparator.score;
 
+import java.util.stream.Stream;
+
 public class LighthouseScoresDiff {
 
   private ScoreDiff performanceDiff;
   private ScoreDiff accessibilityDiff;
   private ScoreDiff bestPracticesDiff;
   private ScoreDiff seoDiff;
+
+  public boolean allPassed() {
+    return Stream.of(performanceDiff, accessibilityDiff, bestPracticesDiff, seoDiff)
+        .noneMatch(s -> Status.FAIL == s.getStatus());
+  }
 
   static class ScoreDiff {
 
@@ -60,7 +67,7 @@ public class LighthouseScoresDiff {
     private ScoreDiff accessibilityDiff;
     private ScoreDiff bestPracticesDiff;
     private ScoreDiff seoDiff;
-    
+
     private final double threshold;
 
     private Builder(double threshold) {
