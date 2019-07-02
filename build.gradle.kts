@@ -66,6 +66,7 @@ val assembleReport = tasks.register<Zip>("assembleReport") {
 
 val assembleServer = tasks.register<Zip>("assembleServer") {
     archiveName = "aet-lighthouse-server.zip"
+    exclude("node_modules")
     from("lighthouse-server")
 }
 
