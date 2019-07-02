@@ -200,7 +200,7 @@
               <!-- TODO: should likely be an h2  -->
               <div class="lh-gauge__label">Performance</div>
               <div class="lh-gauge__label status" ng-class="case.result.diff.performanceDiff.status == 'PASS' ? 'passed' : 'failed'">
-                Diff: {{(case.result.diff.performanceDiff.diff | number: 2) * 100}}
+                <b>{{case.result.kpi.performance}}</b> (<span ng-if="case.result.diff.performanceDiff.status == 'PASS'">+</span>{{(case.result.diff.performanceDiff.diff | number: 2) * 100}})
               </div>
 
             </div>
@@ -220,7 +220,7 @@
               <!-- TODO: should likely be an h2  -->
               <div class="lh-gauge__label">Accessibility</div>
               <div class="lh-gauge__label status" ng-class="case.result.diff.accessibilityDiff.status == 'PASS' ? 'passed' : 'failed'">
-                Diff: {{(case.result.diff.accessibilityDiff.diff | number: 2) * 100}}
+                <b>{{case.result.kpi.accessibility}}</b> (<span ng-if="case.result.diff.accessibilityDiff.status == 'PASS'">+</span>{{(case.result.diff.accessibilityDiff.diff | number: 2) * 100}})
               </div>
             </div>
 
@@ -239,7 +239,7 @@
               <!-- TODO: should likely be an h2  -->
               <div class="lh-gauge__label">Best Practices</div>
               <div class="lh-gauge__label status" ng-class="case.result.diff.bestPracticesDiff.status == 'PASS' ? 'passed' : 'failed'">
-                Diff: {{(case.result.diff.bestPracticesDiff.diff | number: 2) * 100}}
+                <b>{{case.result.kpi.bestPractices}}</b> (<span ng-if="case.result.diff.bestPracticesDiff.status == 'PASS'">+</span>{{(case.result.diff.bestPracticesDiff.diff | number: 2) * 100}})
               </div>
             </div>
 
@@ -258,7 +258,7 @@
               <!-- TODO: should likely be an h2  -->
               <div class="lh-gauge__label">SEO</div>
               <div class="lh-gauge__label status" ng-class="case.result.diff.seoDiff.status == 'PASS' ? 'passed' : 'failed'">
-                Diff: {{(case.result.diff.seoDiff.diff | number: 2) * 100}}
+                <b>{{case.result.kpi.seo}}</b> (<span ng-if="case.result.diff.seoDiff.status == 'PASS'">+</span>{{(case.result.diff.seoDiff.diff | number: 2) * 100}})
               </div>
             </div>
 
