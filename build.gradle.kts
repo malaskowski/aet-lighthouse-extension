@@ -48,8 +48,25 @@ tasks.withType<Jar>().configureEach {
         (manifest as? OsgiManifest)?.apply {
             instruction("Bundle-Vendor", "Maciej Laskowski")
             instruction("Bundle-Description", "AET Extension: lighthouse collector and comparator")
-            instruction("Bundle-DocURL", "https://github.com/Skejven")
+            instruction("Bundle-DocURL", "https://github.com/Skejven/aet-lighthouse-extension")
             instruction("Service-Component", "OSGI-INF/com.github.skejven.collector.LighthouseCollectorFactory.xml,OSGI-INF/com.github.skejven.comparator.LighthouseComparatorFactory.xml")
         }
     }
 }
+
+val assembleConfigs = tasks.register<Zip>("assembleConfigs") {
+    archiveName = "aet-lighthouse-config.zip"
+    from("conf")
+}
+
+val assembleReport = tasks.register<Zip>("assembleReport") {
+    archiveName = "aet-lighthouse-report.zip"
+    from("report")
+}
+
+val assembleServer = tasks.register<Zip>("assembleServer") {
+    archiveName = "aet-lighthouse-server.zip"
+    from("lighthouse-server")
+}
+
+tasks.named("build") { finalizedBy(assembleConfigs, assembleReport, assembleServer) }

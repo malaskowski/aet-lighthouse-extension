@@ -79,7 +79,7 @@ Example suite:
 Simply run `build` task.
 The results will be following artifacts:
 - `aet-lighthouse-extension.jar` bundle
-- `aet-lighthouse-extension-report.zip` - containing [AET Report](https://github.com/Cognifide/aet/tree/master/report) 
+- `aet-lighthouse-report.zip` - containing [AET Report](https://github.com/Cognifide/aet/tree/master/report) 
 extension to display Lighthouse findings
 - `aet-lighthouse-config.zip` - containing configs for the module
 - `aet-lighthouse-server.zip` - containing simple HTTP Server written in NodeJS that runs Lighthouse
