@@ -18,6 +18,7 @@ This collector requires external Lighthouse instance with Web Endpoint configure
 `lighthouseInstanceUri` property in the [`LighthouseCollectorFactory`](https://github.com/Skejven/aet-lighthouse-extension/blob/master/conf/com.github.skejven.collector.LighthouseCollectorFactory.cfg)
 should be set to the Web Endpoint under which [Lighthouse Server](https://github.com/Skejven/aet-lighthouse-extension/tree/master/lighthouse-server)
 works.
+Expected response is a JSON with specification explained in the [Lighthouse Server Endpoint docs](https://github.com/Skejven/aet-lighthouse-extension/tree/master/lighthouse-server#endpoint).
 
 Module name: **`lighthouse`**
 
