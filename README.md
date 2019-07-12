@@ -1,5 +1,5 @@
 # AET Extension: Lighthouse
-This repository contains the [Lighthouse]((https://developers.google.com/web/tools/lighthouse/)) 
+This repository contains the [Lighthouse](https://developers.google.com/web/tools/lighthouse/) 
 extension for the [AET](https://github.com/Cognifide/aet).
 
 Contents:
